@@ -2,7 +2,7 @@
 
 
 # matlabファイルの実行
-nohup echo " weight_for_train_data()" | matlab -nodisplay > weight.out &
+# nohup echo " weight_for_train_data()" | matlab -nodisplay > weight.out &
 
 # rseのlambda決定
 lambda=$(python lambda_decision.py | tail -n 1 >&1)

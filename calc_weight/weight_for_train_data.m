@@ -1,7 +1,7 @@
 function ret = weight_for_train_data();
 
   % path for mosek
-  addpath /home/mosek/8/toolbox/r2014a
+  addpath /home/lapis/mosek/8/toolbox/r2014a
 
 for data = 0:4
     for fold = 0:4
@@ -34,9 +34,9 @@ for data = 0:4
         Q = PLP + PLP';
 
         % solve quadprog with mosek
-        lambda = [100. 10. 1. .1 .01 .001 .0001];
+        % lambda = [100. 10. 1. .1 .01 .001 .0001];
         % lambda = [10000. 1000. 100. 10. 1. .1];
-        % lambda = [20. 19. 18. 17. 16. 15. 14. 13. 12. 11. 10. 9. 8. 7. 6. 5. 4. 3. 2. 1.];
+        lambda = [20. 19. 18. 17. 16. 15. 14. 13. 12. 11. 10. 9. 8. 7. 6. 5. 4. 3. 2. 1.];
 
         [not_use len] = size(lambda);
         disp('\t\t[-] Done Setting...');

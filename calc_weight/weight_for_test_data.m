@@ -1,7 +1,7 @@
 function ret = weight_for_test_data(lambda);
 
 % path for mosek
-addpath /home/mosek/8/toolbox/r2014a
+addpath /home/lapis/mosek/8/toolbox/r2014a
 
 
 % test data

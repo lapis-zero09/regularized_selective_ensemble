@@ -9,18 +9,52 @@ import glob
 
 
 class CheckResult:
-    def __init__(self, name):
-        self.name = 'data'
+    def __init__(self, name='data'):
+        self.name = name
+        p = pd.read_csv('{}/data_0/predictions.csv'.format(self.name),
+                            header=None)
+        self.len = p.shape[0]
+        
+    def best_single_model(self):
+        bst = np.zeros((5, self.len))
+        bst_f1 = np.zeros((5, self.len))
+
+        for fold in range(5):
+            p = pd.read_csv('{}/data_{}/predictions.csv'.format(self.name, fold),
+                            header=None)
+            prd = np.where(p <= 0.0, 0, 1)
+            # p_nn = pd.read_csv(
+            #     '{}/data_{}/predictions_nn.csv'.format(self.name, fold),
+            #     header=None)
+            # prd = pd.concat([p, p_nn])[list(range(p.shape[1]))].reset_index(
+            #     drop=True)
+            # prd = np.where(prd <= 0.0, 0, 1)
+            y_true = pd.read_csv(
+                '{}/data_{}/truelabel.csv'.format(self.name, fold),
+                header=None)
+            y_true = np.where(y_true <= 0.0, 0, 1).flatten()
+
+            for i in range(prd.shape[0]):
+                mse = mean_squared_error(y_true, prd[i])
+                bst[fold, i] = mse
+                f1 = f1_score(y_true, prd[i])
+                bst_f1[fold, i] = f1
+
+        bst = pd.DataFrame(bst)
+        bst_f1 = pd.DataFrame(bst_f1)
+        # bst.describe()
+        return sorted(bst.mean())[0], sorted(bst_f1.mean())[-1]
 
     def rse(self, fold, w):
         p = pd.read_csv('{}/data_{}/predictions.csv'.format(self.name, fold),
                         header=None)
-        p_nn = pd.read_csv(
-            '{}/data_{}/predictions_nn.csv'.format(self.name, fold),
-            header=None)
-        prd = pd.concat([p, p_nn])[list(range(p.shape[1]))].reset_index(
-            drop=True)
-        prd = np.where(prd <= 0.0, 0, 1)
+        prd = np.where(p <= 0.0, 0, 1)
+#         p_nn = pd.read_csv(
+#             '{}/data_{}/predictions_nn.csv'.format(self.name, fold),
+#             header=None)
+#         prd = pd.concat([p, p_nn])[list(range(p.shape[1]))].reset_index(
+#             drop=True)
+#         prd = np.where(prd <= 0.0, 0, 1)
         y_true = pd.read_csv(
             '{}/data_{}/truelabel.csv'.format(self.name, fold),
             header=None)
@@ -67,7 +101,6 @@ class CheckResult:
             f = glob.glob('{}/data_{}/weight/weight_lambda_*.csv'.format(self.name, fold))
             if f:
                 w = pd.read_csv(f[0], header=None)
-                # w[150:510] = 0.0
                 mse_, f1_ = self.rse(fold, w)
                 print('rse')
 

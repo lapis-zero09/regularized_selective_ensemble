@@ -20,16 +20,16 @@ for data in range(5):
     res = np.zeros((5, len(files)))
 
     for fold in range(5):
-        p = pd.read_csv(
+        prd = pd.read_csv(
             '../{}/data_{}/fold_{}/predictions.csv'.format(name,
                                                               data, fold),
             header=None)
-        p_nn = pd.read_csv(
-            '../{}/data_{}/fold_{}/predictions_nn.csv'.format(name,
-                                                                 data, fold),
-            header=None)
-        prd = pd.concat([p,
-                         p_nn])[list(range(p.shape[1]))].reset_index(drop=True)
+        # p_nn = pd.read_csv(
+        #     '../{}/data_{}/fold_{}/predictions_nn.csv'.format(name,
+        #                                                          data, fold),
+        #     header=None)
+        # prd = pd.concat([p,
+        #                  p_nn])[list(range(p.shape[1]))].reset_index(drop=True)
         print('fold_', fold)
         y_true = pd.read_csv(
             '../{}/data_{}/fold_{}/truelabel.csv'.format(name,
