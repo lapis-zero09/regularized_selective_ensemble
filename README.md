@@ -56,3 +56,9 @@
 
 9. 結果の確認
     - `result.py` でRSEの結果確認
+
+## dependencies
+
+- mosek: https://www.mosek.com/
+- weka: https://www.cs.waikato.ac.nz/ml/weka/
+- py4j: https://www.py4j.org/
