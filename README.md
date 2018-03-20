@@ -3,6 +3,9 @@
 - Li, N. and Zhou, Z.-H.: Selective Ensemble under Regularization Framework, Proc. MCS, pp. 293–303 (2009).
 - https://link.springer.com/chapter/10.1007/978-3-642-02326-2_30
 
+
+<img src="./rse_pseudo-code.png" width="50%">
+
 ## データの用意
 
 1. `train_test_split` → `data/data_n/` 以下に保存 n:0-4
