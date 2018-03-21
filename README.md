@@ -1,5 +1,6 @@
 # Reguralized Selective ensemble
 
+- http://lapis-zero09.hatenablog.com/entry/2018/03/21/234500
 - Li, N. and Zhou, Z.-H.: Selective Ensemble under Regularization Framework, Proc. MCS, pp. 293–303 (2009).
 - https://link.springer.com/chapter/10.1007/978-3-642-02326-2_30
 
